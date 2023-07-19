@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+  Relation,
+} from "typeorm";
+import { User } from "./User";
 
 @Entity()
 export class Project {
@@ -13,4 +21,8 @@ export class Project {
 
   @Column()
   likes: number;
+
+  @OneToOne(() => User, (user) => user.project)
+  @JoinColumn()
+  user: Relation<User>;
 }
